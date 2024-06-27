@@ -25,14 +25,196 @@
           </p>
 
           <div class="comentarios-publicacion" >
-          <p>Ver los 20 comentarios</p>
+          <p @click="show_modal()">Ver los 20 comentarios</p>
+         
         </div>
           
         </div>
         
       </div>
         
-     
+     <!--Modal-->
+      <ion-modal
+      :is-open="modalComentario"
+      @didDismiss="modalComentario=false"
+      :initial-breakpoint="0.50"
+      :breakpoints="[0, 0.25, 0.5, 0.75]"
+      handle-behavior="cycle"
+    >
+  
+      <ion-content class="ion-padding magin-buttom">
+        <div class="ion-margin-top">
+          <ion-label>Comentarios</ion-label>
+        </div>
+        <div class="form-comentario">
+          <ion-textarea  v-model="comentario" placeholder="Añade un comentario..."
+            
+         
+              maxlength="100000000"
+           
+             
+            
+              clear-input="true"
+          >
+          </ion-textarea>
+          <div  v-if="comentario.trim().length > 0" class="btn-form-comen">
+            <img src="/paper-plane.svg" alt="">
+          </div>
+        </div>
+        <ion-list>
+          <ion-item>
+            <ion-avatar slot="start">
+              <ion-img src="https://i.pravatar.cc/300?u=b"></ion-img>
+            </ion-avatar>
+            <ion-label>
+              <h2>Connor Smith</h2>
+              <p>Sales Rep</p>
+            </ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-avatar slot="start">
+              <ion-img src="https://i.pravatar.cc/300?u=a"></ion-img>
+            </ion-avatar>
+            <ion-label>
+              <h2>Daniel Smith</h2>
+              <p>Product Designer</p>
+            </ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-avatar slot="start">
+              <ion-img src="https://i.pravatar.cc/300?u=d"></ion-img>
+            </ion-avatar>
+            <ion-label>
+              <h2>Greg Smith</h2>
+              <p>Director of Operations</p>
+            </ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-avatar slot="start">
+              <ion-img src="https://i.pravatar.cc/300?u=e"></ion-img>
+            </ion-avatar>
+            <ion-label>
+              <h2>Zoey Smith</h2>
+              <p>CEO</p>
+            </ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-avatar slot="start">
+              <ion-img src="https://i.pravatar.cc/300?u=b"></ion-img>
+            </ion-avatar>
+            <ion-label>
+              <h2>Connor Smith</h2>
+              <p>Sales Rep</p>
+            </ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-avatar slot="start">
+              <ion-img src="https://i.pravatar.cc/300?u=a"></ion-img>
+            </ion-avatar>
+            <ion-label>
+              <h2>Daniel Smith</h2>
+              <p>Product Designer</p>
+            </ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-avatar slot="start">
+              <ion-img src="https://i.pravatar.cc/300?u=d"></ion-img>
+            </ion-avatar>
+            <ion-label>
+              <h2>Greg Smith</h2>
+              <p>Director of Operations</p>
+            </ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-avatar slot="start">
+              <ion-img src="https://i.pravatar.cc/300?u=e"></ion-img>
+            </ion-avatar>
+            <ion-label>
+              <h2>Zoey Smith</h2>
+              <p>CEO</p>
+            </ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-avatar slot="start">
+              <ion-img src="https://i.pravatar.cc/300?u=b"></ion-img>
+            </ion-avatar>
+            <ion-label>
+              <h2>Connor Smith</h2>
+              <p>Sales Rep</p>
+            </ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-avatar slot="start">
+              <ion-img src="https://i.pravatar.cc/300?u=a"></ion-img>
+            </ion-avatar>
+            <ion-label>
+              <h2>Daniel Smith</h2>
+              <p>Product Designer</p>
+            </ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-avatar slot="start">
+              <ion-img src="https://i.pravatar.cc/300?u=d"></ion-img>
+            </ion-avatar>
+            <ion-label>
+              <h2>Greg Smith</h2>
+              <p>Director of Operations</p>
+            </ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-avatar slot="start">
+              <ion-img src="https://i.pravatar.cc/300?u=e"></ion-img>
+            </ion-avatar>
+            <ion-label>
+              <h2>Zoey Smith</h2>
+              <p>CEO</p>
+            </ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-avatar slot="start">
+              <ion-img src="https://i.pravatar.cc/300?u=b"></ion-img>
+            </ion-avatar>
+            <ion-label>
+              <h2>Connor Smith</h2>
+              <p>Sales Rep</p>
+            </ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-avatar slot="start">
+              <ion-img src="https://i.pravatar.cc/300?u=a"></ion-img>
+            </ion-avatar>
+            <ion-label>
+              <h2>Daniel Smith</h2>
+              <p>Product Designer</p>
+            </ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-avatar slot="start">
+              <ion-img src="https://i.pravatar.cc/300?u=d"></ion-img>
+            </ion-avatar>
+            <ion-label>
+              <h2>Greg Smith</h2>
+              <p>Director of Operations</p>
+            </ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-avatar slot="start">
+              <ion-img src="https://i.pravatar.cc/300?u=e"></ion-img>
+            </ion-avatar>
+            <ion-label>
+              <h2>Zoey Smith</h2>
+              <p>CEO</p>
+            </ion-label>
+          </ion-item>
+        </ion-list>
+
+        
+
+      </ion-content>
+
+      
+    </ion-modal>
+     <!--Fin modal-->
     </ion-content>
    
   </ion-page>
@@ -50,12 +232,12 @@ import {
   IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonGrid, IonRow, IonCol,
   IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonList, IonItemSliding,
   IonItem, IonIcon, IonItemOptions, IonItemOption, IonLabel, IonCardContent,
-  IonModal, IonButtons, IonButton, IonToast, IonSpinner,
+  IonModal, IonButtons, IonButton, IonToast, IonSpinner, IonFooter, IonTextarea
 } from '@ionic/vue';
 import {
   personCircle, eye, create, trash, closeCircle, checkmark, callOutline, personCircleOutline, key
-  ,maleOutline, maleFemaleOutline, mailOutline, homeOutline, mapOutline, arrowRedoOutline, personOutline,
-  manOutline, calendarOutline,
+  ,maleOutline, maleFemaleOutline, mailOutline, homeOutline, mapOutline, arrowRedoOutline, 
+  personOutline, manOutline, calendarOutline
 } from 'ionicons/icons';
 
 export default {
@@ -65,7 +247,7 @@ export default {
     IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonGrid, IonRow, IonCol,
     IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonList, IonItemSliding,
     IonItem, IonIcon, IonItemOptions, IonItemOption, IonLabel, IonCardContent,
-    IonModal, IonButtons, IonButton, IonToast, IonSpinner, ToolBar,
+    IonModal, IonButtons, IonButton, IonToast, IonSpinner, ToolBar, IonFooter, IonTextarea
   },
   data() {
     return {
@@ -77,7 +259,9 @@ export default {
       user: null,
       loading: true,
       responseData: null,
-      expandedItems: []
+      expandedItems: [],
+      modalComentario: false,
+      comentario: '',
     };
   },
   computed: {
@@ -117,6 +301,9 @@ export default {
         this.errorMessage.global = '';
       }, 2000);
     });
+  },
+  show_modal(){
+    this.modalComentario = true;
   },
   truncateText(text) {
       return text.length > 40 ? text.substring(0, 40) + '...' : text;
@@ -172,6 +359,33 @@ ion-content {
 .comentarios-publicacion{
   color: #9c9c9c;
 }
-
+.ion-margin-top{
+  text-align:center;
+  border-bottom: 1px solid #d7d8da;
+  padding-bottom: 5px;
+}
+.hader-modal{
+  text-align:center;
+}
+--ion-modal{
+  border-radius: 10px 10px 0px 0px;
+}
+.footer-modal {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    min-height: 56px;
+  }
+  .form-comentario{
+    display:flex;
+    border-bottom: .5px solid #d7d8da;
+    align-items: center;
+  }
+.form-comentario img{
+  width:30px;
+}
+.btn-form-comen{
+  cursor: pointer;
+}
 
 </style>
