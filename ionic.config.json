@@ -1,0 +1,7 @@
+{
+  "name": "proyecto_artistas",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "vue-vite"
+}
