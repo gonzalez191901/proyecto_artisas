@@ -127,7 +127,8 @@ export default defineComponent({
             this.toastMessage = response.data.message;
 
             if (response.data.user) {
-              localStorage.setItem('user', response.data.user);  // Almacenar el usuario en localStorage
+              //localStorage.setItem('user', response.data.user);  // Almacenar el usuario en localStorage
+              localStorage.setItem('user', JSON.stringify(response.data.user));
               console.log('Usuario almacenado en localStorage:', localStorage.getItem('user'));  // Imprimir el usuario almacenado en la consola
 
               // Añadir un retraso antes de ocultar el loader y redirigir al usuario

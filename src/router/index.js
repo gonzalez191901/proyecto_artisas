@@ -6,6 +6,7 @@ import Tab2Page from '../views/tabs/Tab2Page.vue';
 import Tab3Page from '../views/tabs/Tab3Page.vue';
 import MenuPage from '../views/MenuPage.vue';
 import CreateUserPage from '../views/user/CreateNewPage.vue';
+import Perfil from '../views/user/PerfilPage.vue';
 
 
 
@@ -35,6 +36,10 @@ const routes = [
     meta: {
       showMenu: false
     },
+  },
+  {
+    path: '/user/:username',
+    component: Perfil
   },
     {
     path: '/menu',

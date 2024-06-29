@@ -13,7 +13,8 @@
           <b>{{ item.user.username }}</b>
         </div>
         <div class="foto-publicacion">
-          <img alt="{{ item.user.username }}" src="https://ionicframework.com/docs/img/demos/card-media.png" />
+          <!--<img :alt="item.user.username" :src="urlServ+'/'+item.id+'/'+item.photo" />-->
+          <img :alt="item.user.username" :src="urlServ+'/uploads/'+item.user.id+'/'+item.photo" />
         </div>
         <div class="descripcion-publicacion"> 
           <p>
@@ -25,7 +26,7 @@
           </p>
 
           <div class="comentarios-publicacion" >
-          <p @click="show_modal()">Ver los 20 comentarios</p>
+          <p @click="show_modal(item.id)">{{ item.comentarios.length > 0 ? item.comentarios.length ==  1 ? 'Ver los comentarios' : 'Ver los '+item.comentarios.length+' comentarios' : 'Comentar' }}</p>
          
         </div>
           
@@ -48,164 +49,26 @@
         </div>
         <div class="form-comentario">
           <ion-textarea  v-model="comentario" placeholder="Añade un comentario..."
-            
-         
               maxlength="100000000"
-           
-             
-            
               clear-input="true"
           >
           </ion-textarea>
-          <div  v-if="comentario.trim().length > 0" class="btn-form-comen">
+          <div  v-if="comentario.trim().length > 0" class="btn-form-comen" @click="comentar()">
             <img src="/paper-plane.svg" alt="">
           </div>
         </div>
         <ion-list>
-          <ion-item>
+          <ion-item v-if="arrayComentarios.length" v-for="come in arrayComentarios">
             <ion-avatar slot="start">
               <ion-img src="https://i.pravatar.cc/300?u=b"></ion-img>
             </ion-avatar>
             <ion-label>
-              <h2>Connor Smith</h2>
-              <p>Sales Rep</p>
+              <h2>{{ come.user.username }}</h2>
+              <p>{{ come.comentario }}</p>
             </ion-label>
           </ion-item>
-          <ion-item>
-            <ion-avatar slot="start">
-              <ion-img src="https://i.pravatar.cc/300?u=a"></ion-img>
-            </ion-avatar>
-            <ion-label>
-              <h2>Daniel Smith</h2>
-              <p>Product Designer</p>
-            </ion-label>
-          </ion-item>
-          <ion-item>
-            <ion-avatar slot="start">
-              <ion-img src="https://i.pravatar.cc/300?u=d"></ion-img>
-            </ion-avatar>
-            <ion-label>
-              <h2>Greg Smith</h2>
-              <p>Director of Operations</p>
-            </ion-label>
-          </ion-item>
-          <ion-item>
-            <ion-avatar slot="start">
-              <ion-img src="https://i.pravatar.cc/300?u=e"></ion-img>
-            </ion-avatar>
-            <ion-label>
-              <h2>Zoey Smith</h2>
-              <p>CEO</p>
-            </ion-label>
-          </ion-item>
-          <ion-item>
-            <ion-avatar slot="start">
-              <ion-img src="https://i.pravatar.cc/300?u=b"></ion-img>
-            </ion-avatar>
-            <ion-label>
-              <h2>Connor Smith</h2>
-              <p>Sales Rep</p>
-            </ion-label>
-          </ion-item>
-          <ion-item>
-            <ion-avatar slot="start">
-              <ion-img src="https://i.pravatar.cc/300?u=a"></ion-img>
-            </ion-avatar>
-            <ion-label>
-              <h2>Daniel Smith</h2>
-              <p>Product Designer</p>
-            </ion-label>
-          </ion-item>
-          <ion-item>
-            <ion-avatar slot="start">
-              <ion-img src="https://i.pravatar.cc/300?u=d"></ion-img>
-            </ion-avatar>
-            <ion-label>
-              <h2>Greg Smith</h2>
-              <p>Director of Operations</p>
-            </ion-label>
-          </ion-item>
-          <ion-item>
-            <ion-avatar slot="start">
-              <ion-img src="https://i.pravatar.cc/300?u=e"></ion-img>
-            </ion-avatar>
-            <ion-label>
-              <h2>Zoey Smith</h2>
-              <p>CEO</p>
-            </ion-label>
-          </ion-item>
-          <ion-item>
-            <ion-avatar slot="start">
-              <ion-img src="https://i.pravatar.cc/300?u=b"></ion-img>
-            </ion-avatar>
-            <ion-label>
-              <h2>Connor Smith</h2>
-              <p>Sales Rep</p>
-            </ion-label>
-          </ion-item>
-          <ion-item>
-            <ion-avatar slot="start">
-              <ion-img src="https://i.pravatar.cc/300?u=a"></ion-img>
-            </ion-avatar>
-            <ion-label>
-              <h2>Daniel Smith</h2>
-              <p>Product Designer</p>
-            </ion-label>
-          </ion-item>
-          <ion-item>
-            <ion-avatar slot="start">
-              <ion-img src="https://i.pravatar.cc/300?u=d"></ion-img>
-            </ion-avatar>
-            <ion-label>
-              <h2>Greg Smith</h2>
-              <p>Director of Operations</p>
-            </ion-label>
-          </ion-item>
-          <ion-item>
-            <ion-avatar slot="start">
-              <ion-img src="https://i.pravatar.cc/300?u=e"></ion-img>
-            </ion-avatar>
-            <ion-label>
-              <h2>Zoey Smith</h2>
-              <p>CEO</p>
-            </ion-label>
-          </ion-item>
-          <ion-item>
-            <ion-avatar slot="start">
-              <ion-img src="https://i.pravatar.cc/300?u=b"></ion-img>
-            </ion-avatar>
-            <ion-label>
-              <h2>Connor Smith</h2>
-              <p>Sales Rep</p>
-            </ion-label>
-          </ion-item>
-          <ion-item>
-            <ion-avatar slot="start">
-              <ion-img src="https://i.pravatar.cc/300?u=a"></ion-img>
-            </ion-avatar>
-            <ion-label>
-              <h2>Daniel Smith</h2>
-              <p>Product Designer</p>
-            </ion-label>
-          </ion-item>
-          <ion-item>
-            <ion-avatar slot="start">
-              <ion-img src="https://i.pravatar.cc/300?u=d"></ion-img>
-            </ion-avatar>
-            <ion-label>
-              <h2>Greg Smith</h2>
-              <p>Director of Operations</p>
-            </ion-label>
-          </ion-item>
-          <ion-item>
-            <ion-avatar slot="start">
-              <ion-img src="https://i.pravatar.cc/300?u=e"></ion-img>
-            </ion-avatar>
-            <ion-label>
-              <h2>Zoey Smith</h2>
-              <p>CEO</p>
-            </ion-label>
-          </ion-item>
+          <p v-else="" >Sin comentarios.</p>
+          
         </ion-list>
 
         
@@ -240,6 +103,8 @@ import {
   personOutline, manOutline, calendarOutline
 } from 'ionicons/icons';
 
+
+
 export default {
   name: 'Student',
   components: {
@@ -256,12 +121,15 @@ export default {
       checkmark, callOutline, mailOutline, key, calendarOutline,
       manOutline,
       usuario: {},
-      user: null,
+      user: JSON.parse(localStorage.getItem('user')),
       loading: true,
       responseData: null,
       expandedItems: [],
       modalComentario: false,
       comentario: '',
+      urlServ: '',
+      arrayComentarios: [],
+      var_publi_comen: ''
     };
   },
   computed: {
@@ -280,19 +148,18 @@ export default {
       "Access-Control-Allow-Origin": "*"
     }
   });*/
-      try {
-        this.user = (await this.$storage.get('user')) ?? null;
+      /*try {
+        this.user  ?? null;
       } catch (error) {
         console.error('Error al obtener usuario desde el storage:', error);
-      }
-
-    const id_user = this.user;
+      }*/
 
   axios.post(`${environment.apiUrl}inicio`,{
-          id_user: id_user})
+          id_user: this.user.id})
     .then(response => {
       console.log(response.data);
-      this.responseData = response.data;
+      this.responseData = response.data.publicaciones;
+      this.urlServ = response.data.rutaImagen;
     })
     .catch(error => {
       console.error('Error details:', error);
@@ -302,8 +169,43 @@ export default {
       }, 2000);
     });
   },
-  show_modal(){
+  show_modal(id){
+    this.var_publi_comen = id;
+    this.arrayComentarios = [];
+    axios.post(`${environment.apiUrl}comentarios`,{
+          id_publicacion: this.var_publi_comen})
+    .then(response => {
+      console.log(response.data);
+      this.arrayComentarios = response.data;
+    })
+    .catch(error => {
+      console.error('Error details:', error);
+      this.errorMessage.global = 'Ha ocurrido un error: ' + error.message;
+      setTimeout(() => {
+        this.errorMessage.global = '';
+      }, 2000);
+    });
+
     this.modalComentario = true;
+  },
+  comentar(){
+   
+    axios.post(`${environment.apiUrl}create/comentario`,{
+          id_publicacion: this.var_publi_comen,
+          id_user : this.user.id, 
+          comentario : this.comentario})
+    .then(response => {
+      console.log(response.data);
+      this.show_modal(this.var_publi_comen);
+      this.comentario = '';
+    })
+    .catch(error => {
+      console.error('Error details:', error);
+      this.errorMessage.global = 'Ha ocurrido un error: ' + error.message;
+      setTimeout(() => {
+        this.errorMessage.global = '';
+      }, 2000);
+    });
   },
   truncateText(text) {
       return text.length > 40 ? text.substring(0, 40) + '...' : text;

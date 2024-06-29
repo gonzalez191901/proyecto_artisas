@@ -6,10 +6,11 @@
     <ion-content class="menu-content ion-padding">
       <ion-loading :is-open="showLoader"  message="Cerrando Sesión..." duration="1000"></ion-loading>
 
-      <router-link to="/tabs/tab1" class="menu-item">
+      <router-link :to="/user/+user.username" class="menu-item">
         <div class="menu-item-content">
-          <ion-icon :icon="homeOutline" class="menu-icon"></ion-icon>
-          <span class="menu-title">Ir a Inicio</span>
+          <img src="/person-circle-sharp.svg" alt="" class="user-menu-img">
+          <!--<ion-icon :icon="homeOutline" class="menu-icon"></ion-icon>-->
+          <span class="menu-title">{{ user.username }}</span>
         </div>
       </router-link>
 
@@ -52,7 +53,8 @@ export default {
       modalState: false,
       modalShow: false,
       codificador: {},
-      errors: {}
+      errors: {},
+      user: JSON.parse(localStorage.getItem('user')),
     };
   },
   methods: {
@@ -112,5 +114,9 @@ export default {
   font-size: 16px;
   font-weight: normal;
   color: #333;
+}
+.user-menu-img{
+  width: 24px;
+  margin-right: 10px;
 }
 </style>

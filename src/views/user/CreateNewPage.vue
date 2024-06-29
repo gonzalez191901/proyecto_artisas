@@ -231,7 +231,7 @@
             this.toastMessage = response.data.message;
     
             if (response.data.user) {
-              localStorage.setItem('user', response.data.user);
+              localStorage.setItem('user', JSON.stringify(response.data.user));
               console.log('Usuario almacenado en localStorage:', localStorage.getItem('user'));
     
               setTimeout(() => {
