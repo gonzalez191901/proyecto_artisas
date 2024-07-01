@@ -28,9 +28,9 @@
           </p>
 
           <div class="comentarios-publicacion" >
-          <p @click="show_modal(item.id)">{{ item.comentarios.length > 0 ? item.comentarios.length ==  1 ? 'Ver los comentarios' : 'Ver los '+item.comentarios.length+' comentarios' : 'Comentar' }}</p>
+            <p @click="show_modal(item.id)">{{ item.comentarios.length > 0 ? item.comentarios.length ==  1 ? 'Ver los comentarios' : 'Ver los '+item.comentarios.length+' comentarios' : 'Comentar' }}</p>
          
-        </div>
+          </div>
           
         </div>
         
@@ -97,7 +97,7 @@ import {
   IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonGrid, IonRow, IonCol,
   IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonList, IonItemSliding,
   IonItem, IonIcon, IonItemOptions, IonItemOption, IonLabel, IonCardContent,
-  IonModal, IonButtons, IonButton, IonToast, IonSpinner, IonFooter, IonTextarea
+  IonModal, IonButtons, IonButton, IonToast, IonSpinner, IonFooter, IonTextarea, IonImg
 } from '@ionic/vue';
 import {
   personCircle, eye, create, trash, closeCircle, checkmark, callOutline, personCircleOutline, key
@@ -114,7 +114,7 @@ export default {
     IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonGrid, IonRow, IonCol,
     IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonList, IonItemSliding,
     IonItem, IonIcon, IonItemOptions, IonItemOption, IonLabel, IonCardContent,
-    IonModal, IonButtons, IonButton, IonToast, IonSpinner, ToolBar, IonFooter, IonTextarea
+    IonModal, IonButtons, IonButton, IonToast, IonSpinner, ToolBar, IonFooter, IonTextarea, IonImg
   },
   data() {
     return {

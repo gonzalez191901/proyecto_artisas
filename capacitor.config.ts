@@ -5,7 +5,7 @@ const config: CapacitorConfig = {
   appName: 'proyecto_artistas',
   webDir: 'dist',
   server: {
-    androidScheme: 'https', // Cambia de 'https' a 'http' para permitir solicitudes no seguras
+    androidScheme: 'http', // Cambia de 'https' a 'http' para permitir solicitudes no seguras
     cleartext: true, // Permite conexiones no seguras
   },
   android: {
