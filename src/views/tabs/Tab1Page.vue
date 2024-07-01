@@ -7,11 +7,13 @@
     <ion-content class=" menu-content" > 
       
       <div class="content-publicacion" v-for="item in responseData">
-        <div class="foto-perfil-user">
-          <img alt="Silhouette of mountains" src="https://play-lh.googleusercontent.com/7Ak4Ye7wNUtheIvSKnVgGL_OIZWjGPZNV6TP_3XLxHC-sDHLSE45aDg41dFNmL5COA" />
-          
-          <b>{{ item.user.username }}</b>
-        </div>
+        <router-link :to="/user/+item.user.username" class="router-link-text">
+          <div class="foto-perfil-user">
+            <img :alt="item.user.username" :src="urlServ+'/uploads/profile/'+item.user.photo" @error="onImageError"/>
+            
+            <b>{{ item.user.username }}</b>
+          </div>
+        </router-link>
         <div class="foto-publicacion">
           <!--<img :alt="item.user.username" :src="urlServ+'/'+item.id+'/'+item.photo" />-->
           <img :alt="item.user.username" :src="urlServ+'/uploads/'+item.user.id+'/'+item.photo" />
@@ -60,7 +62,7 @@
         <ion-list>
           <ion-item v-if="arrayComentarios.length" v-for="come in arrayComentarios">
             <ion-avatar slot="start">
-              <ion-img src="https://i.pravatar.cc/300?u=b"></ion-img>
+              <ion-img :src="urlServ+'/uploads/profile/'+come.user.photo" @ionError="onImageError"></ion-img>
             </ion-avatar>
             <ion-label>
               <h2>{{ come.user.username }}</h2>
@@ -129,7 +131,8 @@ export default {
       comentario: '',
       urlServ: '',
       arrayComentarios: [],
-      var_publi_comen: ''
+      var_publi_comen: '',
+      fallbackImage: '/usuarios.png'
     };
   },
   computed: {
@@ -216,6 +219,9 @@ export default {
       } else {
         this.expandedItems.push(id);
       }
+    },
+    onImageError(event) {
+      event.target.src = this.fallbackImage;
     }
 
 },
@@ -249,9 +255,16 @@ ion-content {
   padding: 10px;
   display: flex;
   align-items:center;
+  color: #000;
+
 }
+.router-link-text {
+  text-decoration: none !important; /* Elimina el subrayado */
+}
+
 .foto-perfil-user img{
   width: 40px;
+  height: 40px;
   border-radius: 100%;
   margin-right: 10px;
 }

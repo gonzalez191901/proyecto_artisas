@@ -12,7 +12,7 @@
           <img :src="previewUrl" alt="Preview" class="preview-image">
         </div>
         <div class="form-group">
-          <div class="file-upload-wrapper">
+          <div class="file-upload-wrapper" v-if="!previewUrl">
             <label for="file-upload" class="file-upload-label">
               Selecciona una Imagen
             </label>
@@ -111,6 +111,7 @@ export default {
             }
           });
           console.log('File uploaded successfully:', response.data);
+          this.$router.push('/');
         } catch (error) {
           console.error('Error uploading file:', error);
         }
