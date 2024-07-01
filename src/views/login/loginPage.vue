@@ -8,11 +8,7 @@
     </ion-header>
     <ion-content class="ion-padding custom-background">
       <ion-grid>
-        <ion-row>
-          <ion-col>
-            <ion-title class="left titulo" color="light">Bienvenidos</ion-title>
-          </ion-col>
-        </ion-row>
+        <img src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png" alt="">
         <ion-row class="title ion-padding-bottom">
           <ion-col>
             <ion-input
