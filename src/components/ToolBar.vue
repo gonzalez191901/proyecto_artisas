@@ -28,7 +28,7 @@
         <ion-header class="ion-no-border">
           <ion-toolbar>
             <ion-title>
-              Notificasiones
+              Eventos Disponibles
             </ion-title>
             <ion-buttons slot="end">
               <ion-button @click="modalState=false">
@@ -59,6 +59,18 @@
               </div>
               <div class="menu-title-container">
                 <span class="menu-title"> Cantv Aba </span>
+              </div>
+            </div>
+          </div>
+
+          <div class="card" @click="notificaCones('Hola.')">
+            <div class="card-content">
+              <div class="half-background"></div>
+              <div class="icon-container">
+                <ion-icon :icon="notificationsOutline" class="card-icon"></ion-icon>
+              </div>
+              <div class="menu-title-container">
+                <span class="menu-title"> Hola </span>
               </div>
             </div>
           </div>
@@ -103,7 +115,22 @@ export default {
     };
   },
   methods: {
-   
+    async loadEventos() {
+      axios.post(`${environment.apiUrl}pruebassss`,{
+          id_user: this.user.id})
+    .then(response => {
+      console.log(response.data);
+      this.responseData = response.data.publicaciones;
+      this.urlServ = response.data.rutaImagen;
+    })
+    .catch(error => {
+      console.error('Error details:', error);
+      this.errorMessage.global = 'Ha ocurrido un error: ' + error.message;
+      setTimeout(() => {
+        this.errorMessage.global = '';
+      }, 2000);
+    });
+    },
 
     modal() {
         this.modalState = true;
@@ -127,7 +154,10 @@ export default {
 
       await alert.present();
     },
-  }
+  },
+  ionViewWillEnter() {
+    this.loadEventos();
+  },
 };
 </script>
 

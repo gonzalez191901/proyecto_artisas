@@ -13,7 +13,7 @@
               <img :alt="data_perfil.username" :src="urlServ+'/uploads/profile/'+data_perfil.photo" @error="onImageError"/>
             </div>
           </div>
-          <div>
+          <div v-if="data_perfil.id == user.id">
             <form  class="upload-form">
               <div class="form-group">
                 <div class="file-upload-wrapper">
@@ -29,7 +29,7 @@
             </form>
           </div>
 
-          <div class="sobre-mi">
+          <div class="sobre-mi" v-if="data_perfil.id == user.id">
             <span v-if="!edit_desc">{{ data_perfil.descripcion }} <a href="#" v-if="data_perfil.descripcion == ''" @click.prevent="editar_descripcion()">Agregar Descripción</a><a href="#" v-else @click.prevent="editar_descripcion()">Editar</a> </span>
             <div class="form-comentario" v-if="edit_desc">
               <ion-textarea  v-model="descripcion" placeholder="Añade una descripción"
@@ -41,6 +41,9 @@
                 <img src="/paper-plane.svg" alt="">
               </div>
             </div>
+          </div>
+          <div class="sobre-mi" v-else>
+            <span>{{ data_perfil.descripcion }}</span>
           </div>
 
           <div class="gallery-perfil">

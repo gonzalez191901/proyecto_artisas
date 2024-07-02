@@ -4,9 +4,7 @@
       <ToolBar title="Historias"></ToolBar>
     </ion-header>
  
-    <ion-content class="menu-content" > 
-      
-     
+    <ion-content class="menu-content"> 
       <form @submit.prevent="uploadFile" class="upload-form">
         <div class="preview-container" v-if="previewUrl">
           <img :src="previewUrl" alt="Preview" class="preview-image">
@@ -16,7 +14,7 @@
             <label for="file-upload" class="file-upload-label">
               Selecciona una Imagen
             </label>
-            <input type="file" id="file-upload" @change="onFileSelected" accept="image/*">
+            <input type="file" id="file-upload" ref="fileInput" @change="onFileSelected" accept="image/*">
           </div>
           <ion-textarea
             v-model="description"
@@ -26,40 +24,43 @@
           ></ion-textarea>
         </div>
         
-        <ion-button type="submit">Registrar</ion-button>
+        <ion-button type="submit" class="btn-black">Registrar</ion-button>
       </form>
-    </ion-content>
-   
-  </ion-page>
 
+      <ion-alert
+        :is-open="showAlert"
+        @didDismiss="showAlert = false"
+        header="Error"
+        :message="alertMessage"
+        buttons="OK"
+      ></ion-alert>
+    </ion-content>
+  </ion-page>
 </template>
 
 <script>
-//axios.post(`${environment.apiUrl}create/publicacion`
 import axios from 'axios';
-
 import ToolBar from '../../components/ToolBar.vue';
 import { environment } from '../../config';
 import {
   IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonGrid, IonRow, IonCol,
   IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonList, IonItemSliding,
   IonItem, IonIcon, IonItemOptions, IonItemOption, IonLabel, IonCardContent,
-  IonModal, IonButtons, IonButton, IonToast, IonSpinner, IonTextarea
+  IonModal, IonButtons, IonButton, IonToast, IonSpinner, IonTextarea, IonAlert 
 } from '@ionic/vue';
 import {
-  personCircle, eye, create, trash, closeCircle, checkmark, callOutline, personCircleOutline, key
-  ,maleOutline, maleFemaleOutline, mailOutline, homeOutline, mapOutline, arrowRedoOutline, personOutline,
-  manOutline, calendarOutline,
+  personCircle, eye, create, trash, closeCircle, checkmark, callOutline, personCircleOutline, key,
+  maleOutline, maleFemaleOutline, mailOutline, homeOutline, mapOutline, arrowRedoOutline, personOutline,
+  manOutline, calendarOutline
 } from 'ionicons/icons';
 
 export default {
   name: 'Student',
   components: {
-      
     IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonGrid, IonRow, IonCol,
     IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonList, IonItemSliding,
     IonItem, IonIcon, IonItemOptions, IonItemOption, IonLabel, IonCardContent,
-    IonModal, IonButtons, IonButton, IonToast, IonSpinner, ToolBar, IonTextarea
+    IonModal, IonButtons, IonButton, IonToast, IonSpinner, ToolBar, IonTextarea, IonAlert
   },
   data() {
     return {
@@ -74,25 +75,22 @@ export default {
       foto: null,
       selectedFile: null,
       description: '',
-      previewUrl: null
+      previewUrl: null,
+      showAlert: false,
+      alertMessage: '',
     };
   },
   methods: {
     onFileSelected(event) {
       this.selectedFile = event.target.files[0];
       console.log('File selected:', this.selectedFile);
-
-      // Mostrar vista previa de la imagen seleccionada
       this.showPreview();
     },
     showPreview() {
       const reader = new FileReader();
-
       reader.onload = (event) => {
         this.previewUrl = event.target.result;
       };
-
-      // Read the image as a URL
       if (this.selectedFile) {
         reader.readAsDataURL(this.selectedFile);
       }
@@ -111,21 +109,32 @@ export default {
             }
           });
           console.log('File uploaded successfully:', response.data);
+          
+          // Clear the file input and preview
+          this.selectedFile = null;
+          this.previewUrl = null;
+          this.description = '';
+          if (this.$refs.fileInput) {
+            this.$refs.fileInput.value = null;
+          }
+          
           this.$router.push('/');
         } catch (error) {
-          console.error('Error uploading file:', error);
+          this.alertMessage = 'Error uploading file: ' + error.message;
+          this.showAlert = true;
         }
       } else {
-        console.log('No file selected.');
+        this.alertMessage = 'Please select a file to upload.';
+        this.showAlert = true;
       }
     }
   }
 };
 </script>
-<style scoped>
 
+<style scoped>
 ion-content {
-  --background:#fff; /* Ajuste para hacerlo un poco más oscuro */
+  --background:#fff;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -167,14 +176,13 @@ ion-content {
   left: 0;
   top: 0;
   opacity: 0;
-  
 }
 
 .description-textarea {
   width: 100%;
   resize: vertical;
   padding: 10px;
-  border-bottom:  0.5px solid #d7d8da;
+  border-bottom: 0.5px solid #d7d8da;
 }
 
 .preview-container {
@@ -189,5 +197,8 @@ ion-content {
   margin: auto;
   display: block;
 }
-
+.btn-black{
+  --background: #000; /* Color de fondo negro */
+  --color: #fff;      /* Color del texto blanco */
+}
 </style>
