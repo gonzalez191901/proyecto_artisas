@@ -9,12 +9,12 @@
         </ion-tab-button>
 
         <ion-tab-button tab="tab2" href="/tabs/tab2">
-          <ion-icon :icon="homeSharp" class="menu-icon"></ion-icon>
+          <ion-icon :icon="addCircle"></ion-icon>
            
         </ion-tab-button>
 
-        <ion-tab-button tab="tab3" href="/tabs/tab3">
-          <ion-icon aria-hidden="true" :icon="square" />
+        <ion-tab-button tab="tab3" href="/tabs/tab3" v-if="user.id_rol == 2">
+          <ion-icon aria-hidden="true" :icon="airplane" />
           <!-- <ion-label>Estados</ion-label> -->
         </ion-tab-button>
       </ion-tab-bar>
@@ -24,7 +24,9 @@
 
 <script setup lang="ts">
 import { IonTabBar, IonTabButton, IonTabs, IonLabel, IonIcon, IonPage, IonRouterOutlet } from '@ionic/vue';
-import { ellipse, square, triangle, homeSharp } from 'ionicons/icons';
+import { ellipse, square, triangle, homeSharp, addCircle, airplane } from 'ionicons/icons';
+
+const user = JSON.parse(localStorage.getItem('user') || '{}');
 </script>
 
 

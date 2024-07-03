@@ -18,6 +18,9 @@
           <!--<img :alt="item.user.username" :src="urlServ+'/'+item.id+'/'+item.photo" />-->
           <img :alt="item.user.username" :src="urlServ+'/uploads/'+item.user.id+'/'+item.photo" />
         </div>
+        <div class="like-publicacion">
+          <ion-icon :icon="heart" class="icono-like"/> <span>120</span>
+        </div>
         <div class="descripcion-publicacion"> 
           <p>
             <b>{{ item.user.username }} </b>
@@ -102,7 +105,7 @@ import {
 import {
   personCircle, eye, create, trash, closeCircle, checkmark, callOutline, personCircleOutline, key
   ,maleOutline, maleFemaleOutline, mailOutline, homeOutline, mapOutline, arrowRedoOutline, 
-  personOutline, manOutline, calendarOutline
+  personOutline, manOutline, calendarOutline, heart
 } from 'ionicons/icons';
 
 
@@ -132,7 +135,8 @@ export default {
       urlServ: '',
       arrayComentarios: [],
       var_publi_comen: '',
-      fallbackImage: '/usuarios.png'
+      fallbackImage: '/usuarios.png',
+      heart,
     };
   },
   computed: {
@@ -301,6 +305,18 @@ ion-content {
 }
 .btn-form-comen{
   cursor: pointer;
+}
+.like-publicacion{
+  font-size: 25px;
+  margin-left: 10px;
+  margin-top: 10px;
+  cursor:pointer;
+}
+.like-publicacion .icono-like{
+  color:red;
+}
+.like-publicacion span{
+  font-size: 12px;
 }
 
 </style>

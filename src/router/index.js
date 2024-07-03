@@ -38,8 +38,13 @@ const routes = [
     },
   },
   {
-    path: '/user/:username',
-    component: Perfil
+    path: '/user/',
+    component: TabsPage,
+    children: [
+      {
+        path: ':username',
+        component: Perfil,
+      }]
   },
     {
     path: '/menu',

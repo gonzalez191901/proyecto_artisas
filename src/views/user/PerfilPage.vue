@@ -56,6 +56,18 @@
         <div v-else>
 
         </div>
+
+        <div class="gallery">
+          <div class="content-publicacion" v-for="item in data_perfil.publicaciones">
+           
+            <div class="foto-publicacion">
+              <!--<img :alt="item.user.username" :src="urlServ+'/'+item.id+'/'+item.photo" />-->
+              <img :alt="item.user.username" :src="urlServ+'/uploads/'+item.user.id+'/'+item.photo" />
+            </div>
+            
+            
+          </div>
+        </div>
         
         
         
@@ -124,7 +136,7 @@
     },
     computed: {
       truncatedDescriptions() {
-        return this.responseData.reduce((acc, item) => {
+        return this.data_perfil.publicaciones.reduce((acc, item) => {
           acc[item.id] = this.expandedItems.includes(item.id) ? item.descripcion : this.truncateText(item.descripcion);
           return acc;
         }, {});
@@ -151,6 +163,9 @@
           console.error('Error');
           this.find_perfil = 2;
         }
+    },
+    truncateText(text) {
+      return text.length > 40 ? text.substring(0, 40) + '...' : text;
     },
     triggerFileInput() {
         this.$refs.fileInput.click();
@@ -266,6 +281,46 @@
   color: #d7d8da;
   text-decoration: none;
 }
+.view-more {
+  color: #9c9c9c;
+  cursor: pointer;
+  text-decoration: none;
+}
+.content-publicacion{
+  box-sizing: border-box;
+}
+.descripcion-publicacion{
+  padding: 10px;
+}
+.foto-perfil-user{
+  padding: 10px;
+  display: flex;
+  align-items:center;
+  color: #000;
+
+}
+.router-link-text {
+  text-decoration: none !important; /* Elimina el subrayado */
+}
+
+.foto-perfil-user img{
+  width: 40px;
+  height: 40px;
+  border-radius: 100%;
+  margin-right: 10px;
+}
+.foto-publicacion, .foto-publicacion img{
+  width: 100%;
+  aspect-ratio: 1 / 1;
+}
+.comentarios-publicacion{
+  color: #9c9c9c;
+}
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    margin-top: 10px;
+  }
   
   </style>
   

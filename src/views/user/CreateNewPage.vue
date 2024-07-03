@@ -150,8 +150,8 @@
                 :class="{ 'invalid-input': error.tipoUsuario, 'custom-input': true }"
                 label="Tipo de Usuario"
               >
-                <ion-select-option value="artista">Artista</ion-select-option>
-                <ion-select-option value="usuario">Usuario</ion-select-option>
+                <ion-select-option value="2">Artista</ion-select-option>
+                <ion-select-option value="1">Usuario</ion-select-option>
               </ion-select>
             </ion-col>
           </ion-row>
