@@ -24,11 +24,16 @@
                 label-placement="floating" fill="outline" placeholder="Titulo"
                 color="medium"
                 v-model="title"
-                :class="{ 'invalid-input': error.title, 'custom-input': true }"
+               
                 maxlength="30"
                 clear-input="true"
-                label="Nombre"
+                label="Titulo"
               ></ion-input>
+              <ion-label v-if="errors && errors.title" style="margin-top: 10px;
+                  font-size: 13px; color: red;"
+                  class="error-message ion-padding">
+                    {{ errors.title[0] }}
+              </ion-label>
             </ion-col>
           </ion-row>
           <ion-row class="title ion-padding-bottom">
@@ -38,10 +43,15 @@
                 v-model="description"
                 required
                 color="medium"
-                :class="{ 'invalid-input': error.title, 'custom-input': true }"
+         
                 maxlength="30"
                 clear-input="true">
               </ion-textarea>
+              <ion-label v-if="errors && errors.description" style="margin-top: 10px;
+                  font-size: 13px; color: red;"
+                  class="error-message ion-padding">
+                    {{ errors.description[0] }}
+              </ion-label>
             </ion-col>
           </ion-row>
           <ion-row class="title ion-padding-bottom">
@@ -50,12 +60,17 @@
                 label-placement="floating" fill="outline" placeholder="Fecha de Inicio"
                 color="medium"
                 v-model="startDate"
-                :class="{ 'invalid-input': error.startDate, 'custom-input': true }"
+          
                 maxlength="30"
                 clear-input="true"
                 type="date"
                 label="Fecha de Inicio"
               ></ion-input>
+              <ion-label v-if="errors && errors.startDate" style="margin-top: 10px;
+                  font-size: 13px; color: red;"
+                  class="error-message ion-padding">
+                    {{ errors.startDate[0] }}
+              </ion-label>
             </ion-col>
           </ion-row>
           <ion-row class="title ion-padding-bottom">
@@ -66,12 +81,17 @@
                 placeholder="Hora de Inicio"
                 color="medium"
                 v-model="startTime"
-                :class="{ 'invalid-input': error.startTime, 'custom-input': true }"
+    
                 maxlength="30"
                 clear-input="true"
                 type="time"
                 label="Hora de Inicio"
               ></ion-input>
+              <ion-label v-if="errors && errors.startTime" style="margin-top: 10px;
+                  font-size: 13px; color: red;"
+                  class="error-message ion-padding">
+                    {{ errors.startTime[0] }}
+              </ion-label>
             </ion-col>
           </ion-row>
           <ion-row class="title ion-padding-bottom">
@@ -80,12 +100,17 @@
                 label-placement="floating" fill="outline" placeholder="Fecha de Fin"
                 color="medium"
                 v-model="endDate"
-                :class="{ 'invalid-input': error.endDate, 'custom-input': true }"
+             
                 maxlength="30"
                 clear-input="true"
                 type="date"
                 label="Fecha de Fin"
               ></ion-input>
+              <ion-label v-if="errors && errors.endDate" style="margin-top: 10px;
+                  font-size: 13px; color: red;"
+                  class="error-message ion-padding">
+                    {{ errors.endDate[0] }}
+              </ion-label>
             </ion-col>
           </ion-row>
           <ion-row class="title ion-padding-bottom">
@@ -96,12 +121,17 @@
                 placeholder="Hora de Fin"
                 color="medium"
                 v-model="endTime"
-                :class="{ 'invalid-input': error.endTime, 'custom-input': true }"
+             
                 maxlength="30"
                 clear-input="true"
                 type="time"
                 label="Hora de Fin"
               ></ion-input>
+              <ion-label v-if="errors && errors.endTime" style="margin-top: 10px;
+                  font-size: 13px; color: red;"
+                  class="error-message ion-padding">
+                    {{ errors.endTime[0] }}
+              </ion-label>
             </ion-col>
           </ion-row>
       </ion-grid>
@@ -147,7 +177,7 @@ export default {
       showAlert: false,
       alertMessage: '',
       user: JSON.parse(localStorage.getItem('user')),
-      error: []
+      errors: [],
     };
   },
   methods: {
@@ -177,21 +207,39 @@ export default {
         formData.append('id_user', this.user.id);
 
         try {
-          const response = await axios.post(`${environment.apiUrl}create/event`, formData, {
-            headers: {
-              'Content-Type': 'multipart/form-data'
-            }
-          });
-          console.log('Event registered successfully:', response.data);
-          this.alertMessage = 'Evento Creado';
-          this.showAlert = true;
-          //this.$router.push('/');
+          axios.post(`${environment.apiUrl}create/event`, formData)
+          .then(response => {
+
+            console.log('Event registered successfully:', response.data);
+            this.alertMessage = 'Evento Creado';
+            this.showAlert = true;
+            //this.$router.push('/');
+            this.title = '';
+            this.description = '';
+            this.startDate = '';
+            this.endDate = '';
+            this.startTime = '';
+            this.endTime = '';
+            this.selectedFile = '';
+
+             
+          })
+          .catch(error => {
+      
+              if (error.response) {
+                this.errors = error.response.data.errors;
+               
+              }
+              console.log(error);
+            });
+         
+          
         } catch (error) {
           this.alertMessage = 'Error registering event: ' + error.message;
           this.showAlert = true;
         }
       } else {
-        this.alertMessage = 'Please select a file to upload.';
+        this.alertMessage = 'Seleccione un Imagen.';
         this.showAlert = true;
       }
     }

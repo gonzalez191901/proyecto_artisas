@@ -28,7 +28,7 @@
   </template>
   
   <script>
-  import { IonContent, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonList, IonItem, IonLabel, IonInput, IonButton } from '@ionic/vue';
+  import { IonContent, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonList, IonItem, IonLabel, IonInput, IonButton, IonLoading } from '@ionic/vue';
   
   export default {
     name: 'Formulario',

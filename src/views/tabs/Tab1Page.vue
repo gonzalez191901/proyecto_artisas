@@ -44,7 +44,7 @@
       <ion-modal
       :is-open="modalComentario"
       @didDismiss="modalComentario=false"
-      :initial-breakpoint="0.50"
+      :initial-breakpoint="0.60"
       :breakpoints="[0, 0.25, 0.5, 0.75]"
       handle-behavior="cycle"
     >

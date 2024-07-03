@@ -56,7 +56,7 @@
       <ion-modal
       :is-open="modalEvento"
       @didDismiss="modalEvento=false"
-      :initial-breakpoint="0.50"
+      :initial-breakpoint="0.80"
       :breakpoints="[0, 0.25, 0.5, 0.75]"
       handle-behavior="cycle"
     >
@@ -74,7 +74,7 @@
           <div><b>Hasta:</b> {{dataEvento.hora_fin}} {{dataEvento.fecha_fin}} </div>
         </div> <br>
         <div>
-          <b>Creado Por: <router-link :to="/user/+dataEvento.user.username" class="router-link-text">
+          <b>Creado Por: <router-link :to="/user/+dataEvento.user.username" class="router-link-text" @click="resetModal()">
           <div class="foto-perfil-user">
             <img :alt="dataEvento.user.username" :src="urlServ+'/uploads/profile/'+dataEvento.user.photo" @error="onImageError"/>
             
@@ -99,7 +99,7 @@
     
         </ion-content>
       </ion-modal>
-  
+    <ion-loading :is-open="showLoader" message="Cargando..."></ion-loading>
     </ion-content>
   </ion-header>
 
@@ -108,7 +108,7 @@
 
 <script>
 import { IonHeader, IonToolbar, IonTitle, IonButtons, IonButton, IonIcon, IonContent, IonBadge,
-  IonModal
+  IonModal, IonLoading
 } from '@ionic/vue';
 import axios from 'axios';
 import { environment } from '../config';
@@ -117,7 +117,7 @@ import { alertController } from '@ionic/vue';
 export default {
   name: 'ToolBar',
   components: {
-    IonHeader, IonToolbar, IonTitle, IonButtons, IonButton, IonIcon,   IonModal, IonContent, IonBadge
+    IonHeader, IonToolbar, IonTitle, IonButtons, IonButton, IonIcon,   IonModal, IonContent, IonBadge, IonLoading
 
   },
   props: {
@@ -136,6 +136,7 @@ export default {
       dataEvento: [],
       urlServ: '',
       responseData: [],
+      showLoader: false,
     };
   },
   methods: {
@@ -184,6 +185,14 @@ export default {
     onImageError(event) {
       event.target.src = '/usuarios.png';
     },
+    resetModal(){
+      this.modalEvento = false;
+      this.modalState = false;
+      this.showLoader = true; 
+      setTimeout(() => {
+            this.showLoader = false;
+          }, 1000);
+    }
   },
   mounted() {
     this.loadEventos();
