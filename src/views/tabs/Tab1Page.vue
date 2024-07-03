@@ -16,7 +16,8 @@
         </router-link>
         <div class="foto-publicacion">
           <!--<img :alt="item.user.username" :src="urlServ+'/'+item.id+'/'+item.photo" />-->
-          <img :alt="item.user.username" :src="urlServ+'/uploads/'+item.user.id+'/'+item.photo" />
+          <img :alt="item.user.username" :src="urlServ+'/uploads/'+item.user.id+'/'+item.photo" @error="onImageErrorPublicacion"/>
+
         </div>
         <div class="like-publicacion">
           <ion-icon :icon="heart" class="icono-like"/> <span>120</span>
@@ -226,6 +227,9 @@ export default {
     },
     onImageError(event) {
       event.target.src = this.fallbackImage;
+    },
+    onImageErrorPublicacion(event){
+      event.target.src = '/cargando.png';
     }
 
 },
