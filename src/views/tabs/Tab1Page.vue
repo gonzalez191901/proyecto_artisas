@@ -6,7 +6,7 @@
  
     <ion-content class=" menu-content" > 
       
-      <div class="content-publicacion" v-for="item in responseData">
+      <div class="content-publicacion" v-for="(item, index) in responseData">
         <router-link :to="/user/+item.user.username" class="router-link-text">
           <div class="foto-perfil-user">
             <img :alt="item.user.username" :src="urlServ+'/uploads/profile/'+item.user.photo" @error="onImageError"/>
@@ -20,7 +20,9 @@
 
         </div>
         <div class="like-publicacion">
-          <ion-icon :icon="heart" class="icono-like"/> <span>120</span>
+          <ion-icon :icon="heart"
+      :class="{'icono-like': true, 'like-active': item.isLiked, 'like-inactive': !item.isLiked}"
+      @click="toggleLike(index, item.id)"/> <span>{{item.likes.length}}</span>
         </div>
         <div class="descripcion-publicacion"> 
           <p>
@@ -138,6 +140,7 @@ export default {
       var_publi_comen: '',
       fallbackImage: '/usuarios.png',
       heart,
+      mis_likes: [],
     };
   },
   computed: {
@@ -166,8 +169,15 @@ export default {
           id_user: this.user.id})
     .then(response => {
       console.log(response.data);
-      this.responseData = response.data.publicaciones;
+      //this.responseData = response.data.publicaciones;
+      this.responseData = response.data.publicaciones.map(item => {
+        return {
+          ...item,
+          isLiked: response.data.mis_likes.some(like => like.id_publicacion === item.id)
+        };
+      });
       this.urlServ = response.data.rutaImagen;
+      this.mis_likes = response.data.mis_likes;
     })
     .catch(error => {
       console.error('Error details:', error);
@@ -230,7 +240,30 @@ export default {
     },
     onImageErrorPublicacion(event){
       event.target.src = '/cargando.png';
-    }
+    },
+    toggleLike(index, itemId) {
+      // Alterna el estado localmente
+      this.responseData[index].isLiked = !this.responseData[index].isLiked;
+
+      // Define la URL y los datos a enviar
+
+      const data = {
+        isLiked: this.responseData[index].isLiked,
+        id_publicacion: itemId,
+        id_user : this.user.id,
+      };
+
+      // Envía la petición usando Axios
+      axios.post(`${environment.apiUrl}like_publicacion`, data)
+        .then(response => {
+          console.log(response.data);
+        })
+        .catch(error => {
+          console.error(error);
+          // Si hay un error, revertir el estado local
+          this.items[index].isLiked = !this.items[index].isLiked;
+        });
+    },
 
 },
 
@@ -317,10 +350,17 @@ ion-content {
   cursor:pointer;
 }
 .like-publicacion .icono-like{
-  color:red;
+  /*color:red;*/
+
 }
 .like-publicacion span{
   font-size: 12px;
+}
+.like-active {
+  color: red;
+}
+.like-inactive {
+  color: grey;
 }
 
 </style>

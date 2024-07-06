@@ -49,7 +49,7 @@
         </ion-row>
         <ion-row>
             <ion-col class="center">
-              <a href="/register">Registrar</a>
+              <a href="/register" class="link-register">Registrar</a>
             </ion-col>
           </ion-row>
       </ion-grid>
@@ -279,5 +279,9 @@ ion-content {
 
 .invalid-label {
   color: red;
+}
+.link-register{
+  text-decoration: none;
+  color: #424242;
 }
 </style>

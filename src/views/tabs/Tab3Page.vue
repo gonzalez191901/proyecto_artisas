@@ -142,7 +142,7 @@
       <ion-alert
         :is-open="showAlert"
         @didDismiss="showAlert = false"
-        header="Error"
+        :header="alertTitle"
         :message="alertMessage"
         buttons="OK"
       ></ion-alert>
@@ -176,6 +176,7 @@ export default {
       previewUrl: null,
       showAlert: false,
       alertMessage: '',
+      alertTitle: '',
       user: JSON.parse(localStorage.getItem('user')),
       errors: [],
     };
@@ -212,6 +213,7 @@ export default {
 
             console.log('Event registered successfully:', response.data);
             this.alertMessage = 'Evento Creado';
+            this.alertTitle = 'Exito';
             this.showAlert = true;
             //this.$router.push('/');
             this.title = '';
@@ -221,7 +223,7 @@ export default {
             this.startTime = '';
             this.endTime = '';
             this.selectedFile = '';
-
+            this.previewUrl = null;
              
           })
           .catch(error => {
@@ -236,10 +238,12 @@ export default {
           
         } catch (error) {
           this.alertMessage = 'Error registering event: ' + error.message;
+          this.alertTitle = 'Error';
           this.showAlert = true;
         }
       } else {
         this.alertMessage = 'Seleccione un Imagen.';
+        this.alertTitle = 'Error';
         this.showAlert = true;
       }
     }

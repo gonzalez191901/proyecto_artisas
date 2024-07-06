@@ -7,6 +7,9 @@
     <ion-content class="menu-content"> 
       <form @submit.prevent="uploadFile" class="upload-form">
         <div class="preview-container" v-if="previewUrl">
+          <div class="trash" @click="delete_photo()">
+            <ion-icon :icon="trash" class="icono-like"/>
+          </div>
           <img :src="previewUrl" alt="Preview" class="preview-image">
         </div>
         <div class="form-group">
@@ -22,6 +25,11 @@
             rows="4"
             class="description-textarea"
           ></ion-textarea>
+          <ion-label v-if="errors && errors.description" style="margin-top: 10px;
+                  font-size: 13px; color: red;"
+                  class="error-message ion-padding">
+                    {{ errors.description[0] }}
+              </ion-label>
         </div>
         
         <ion-button type="submit" class="btn-black">Registrar</ion-button>
@@ -78,6 +86,7 @@ export default {
       previewUrl: null,
       showAlert: false,
       alertMessage: '',
+      errors: [],
     };
   },
   methods: {
@@ -120,13 +129,21 @@ export default {
           
           this.$router.push('/');
         } catch (error) {
-          this.alertMessage = 'Error uploading file: ' + error.message;
-          this.showAlert = true;
+          if (error.response) {
+                this.errors = error.response.data.errors;
+               
+              }
+              console.log(error);
+          //this.alertMessage = 'Error uploading file: ' + error.message;
+          //this.showAlert = true;
         }
       } else {
         this.alertMessage = 'Please select a file to upload.';
         this.showAlert = true;
       }
+    },
+    delete_photo(){
+      this.previewUrl = false;
     }
   }
 };
@@ -138,6 +155,7 @@ ion-content {
   display: flex;
   flex-direction: column;
   align-items: center;
+ 
 }
 
 .upload-form {
@@ -189,16 +207,34 @@ ion-content {
   margin-top: 20px;
   width: 100%;
   text-align: center;
+  position: relative;
+  display: inline-block;
 }
 
 .preview-image {
-  max-width: 100%;
+  width: 100%;
   max-height: 300px;
   margin: auto;
   display: block;
+  height: auto;
 }
 .btn-black{
   --background: #000; /* Color de fondo negro */
   --color: #fff;      /* Color del texto blanco */
 }
+.trash {
+  position: absolute;
+  top: 10px; /* Ajusta el valor según sea necesario */
+  right: 10px; /* Ajusta el valor según sea necesario */
+  background-color: rgba(0, 0, 0, 0.5); /* Fondo semi-transparente */
+  color: white; /* Color del icono */
+  padding: 5px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.trash ion-icon {
+  font-size: 20px; /* Ajusta el tamaño del icono según sea necesario */
+}
+
 </style>
