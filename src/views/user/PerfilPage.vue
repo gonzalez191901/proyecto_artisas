@@ -76,7 +76,7 @@
           <div>
             {{ datafoto.descripcion }}
           </div>
-          <div class="trash" @click="delete_photo(datafoto.id)">
+          <div class="trash" @click="delete_photo(datafoto.id)" v-if="data_perfil.id == user.id">
             <ion-icon :icon="trash" class="icono-like"/> Eliminar
           </div>
       </ion-content>
