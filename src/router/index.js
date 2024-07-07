@@ -7,6 +7,7 @@ import Tab3Page from '../views/tabs/Tab3Page.vue';
 import MenuPage from '../views/MenuPage.vue';
 import CreateUserPage from '../views/user/CreateNewPage.vue';
 import Perfil from '../views/user/PerfilPage.vue';
+import PerfilUpdate from '../views/user/PerfilUpdate.vue';
 
 
 
@@ -44,6 +45,15 @@ const routes = [
       {
         path: ':username',
         component: Perfil,
+      }]
+  },
+  {
+    path: '/perfil/',
+    component: TabsPage,
+    children: [
+      {
+        path: 'update',
+        component: PerfilUpdate,
       }]
   },
     {

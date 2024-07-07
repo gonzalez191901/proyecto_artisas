@@ -6,6 +6,9 @@
         <ion-title>Registro de Artistas</ion-title>
       </ion-toolbar>
     </ion-header>
+    <div class="logo">
+      <img src="/logo.jpeg" alt="">
+    </div>
     <ion-content class="ion-padding custom-background">
       <ion-grid>
         <ion-row class="title ion-padding-bottom">
@@ -289,5 +292,14 @@ footer{
   width: 100%;
   text-align: center;
   font-size: 10px;
+}
+.logo{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.logo img{
+  width: 200px;
+  height: auto;
 }
 </style>

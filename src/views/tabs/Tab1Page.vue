@@ -1,7 +1,7 @@
 <template>
   <ion-page style="background-color: #f0f2f5;">
     <ion-header class="ion-no-border">
-      <ToolBar title="Perfil"></ToolBar>
+      <ToolBar title="Inicio"></ToolBar>
     </ion-header>
  
     <ion-content class="menu-content">

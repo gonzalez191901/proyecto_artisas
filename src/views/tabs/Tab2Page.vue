@@ -1,7 +1,7 @@
 <template>
   <ion-page style="background-color: #f0f2f5;">
     <ion-header class="ion-no-border">
-      <ToolBar title="Historias"></ToolBar>
+      <ToolBar title="Nueva Publicación"></ToolBar>
     </ion-header>
  
     <ion-content class="menu-content"> 
@@ -138,7 +138,7 @@ export default {
           //this.showAlert = true;
         }
       } else {
-        this.alertMessage = 'Please select a file to upload.';
+        this.alertMessage = 'Seleccione una Imagen';
         this.showAlert = true;
       }
     },

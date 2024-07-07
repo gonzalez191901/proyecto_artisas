@@ -13,7 +13,12 @@
           <span class="menu-title">{{ user.username }}</span>
         </div>
       </router-link>
-
+      <router-link to="/perfil/update" class="menu-item">
+        <div class="menu-item-content">
+          <ion-icon :icon="brush" class="menu-icon"></ion-icon>
+          <span class="menu-title">Editar Perfil</span>
+        </div>
+      </router-link>
       <div class="menu-item-content" @click="logout" style="cursor: pointer;">
         <ion-icon :icon="logOutOutline" class="menu-icon"></ion-icon>
         <span class="menu-title">Cerrar Sesión</span>
@@ -30,7 +35,7 @@
 <script>
 import ToolBar from '../components/ToolBar.vue';
 import { IonPage, IonHeader, IonContent, IonIcon, IonLoading, IonModal, IonGrid, IonRow, IonCol, IonLabel, IonButtons, IonButton, IonToolbar, IonTitle } from '@ionic/vue';
-import { airplane, wifi, bluetooth, callOutline, personCircle, receiptOutline, settingsOutline, logOutOutline, homeOutline, cardOutline, createOutline, closeCircle } from 'ionicons/icons';
+import { airplane, wifi, bluetooth, callOutline, personCircle, receiptOutline, settingsOutline, logOutOutline, homeOutline, cardOutline, createOutline, closeCircle, brush } from 'ionicons/icons';
 
 export default {
   components: {
@@ -56,6 +61,7 @@ export default {
       codificador: {},
       errors: {},
       user: JSON.parse(localStorage.getItem('user')),
+      brush,
     };
   },
   methods: {

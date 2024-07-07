@@ -54,43 +54,10 @@
       <div class="gallery">
         <div class="content-publicacion" v-for="item in data_perfil.publicaciones">
           <div class="foto-publicacion">
-            <img :alt="item.user.username" :src="urlServ+'/uploads/'+item.user.id+'/'+item.photo" @click="show_modal(item)"/>
+            <img :alt="item.user.username" :src="urlServ+'/uploads/'+item.user.id+'/'+item.photo" />
           </div>
         </div>
       </div>
-
-      <!--Modal-->
-      <ion-modal
-      :is-open="modalEvento"
-      @didDismiss="modalEvento=false"
-      :initial-breakpoint="0.80"
-      :breakpoints="[0, 0.25, 0.5, 0.75]"
-      handle-behavior="cycle"
-    >
-  
-      <ion-content class="ion-padding magin-buttom" v-if="modalEvento=true">
-      
-        <div class="foto-publicacion">
-            <img  :alt="datafoto.user.username" :src="urlServ+'/uploads/'+datafoto.user.id+'/'+datafoto.photo"/>
-          </div>
-          <div>
-            {{ datafoto.descripcion }}
-          </div>
-          <div class="trash" @click="delete_photo(datafoto.id)">
-            <ion-icon :icon="trash" class="icono-like"/> Eliminar
-          </div>
-      </ion-content>
-
-      
-    </ion-modal>
-     <!--Fin modal-->
-     <ion-alert
-        :is-open="showAlert"
-        @didDismiss="showAlert = false"
-        header="Alerta"
-        :message="alertMessage"
-        buttons="OK"
-      ></ion-alert>
     </ion-content>
   </ion-page>
 </template>
@@ -100,16 +67,13 @@ import axios from 'axios';
 import ToolBar from '../../components/ToolBar.vue';
 import { environment } from '../../config';
 import {
-  IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonTextarea, IonRefresher, IonRefresherContent, IonModal
+  IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonTextarea, IonRefresher, IonRefresherContent
 } from '@ionic/vue';
-import {
-  trash
-} from 'ionicons/icons';
 
 export default {
   name: 'Student',
   components: {
-    IonPage, IonHeader, IonToolbar, IonTitle, IonContent, ToolBar, IonTextarea, IonRefresher, IonRefresherContent, IonModal
+    IonPage, IonHeader, IonToolbar, IonTitle, IonContent, ToolBar, IonTextarea, IonRefresher, IonRefresherContent
   },
   data() {
     return {
@@ -121,11 +85,6 @@ export default {
       fallbackImage: '/usuarios.png',
       descripcion: '',
       edit_desc: false,
-      modalEvento: false,
-      datafoto: [],
-      trash,
-      showAlert: false,
-      alertMessage: '',
     };
   },
   methods: {
@@ -150,16 +109,6 @@ export default {
     triggerFileInput() {
       this.$refs.fileInput.click();
     },
-    show_modal(data){
-        /*this.dataEvento = data;
-        */
-       if(data){
-        this.modalEvento = true;
-        this.datafoto = data;
-        console.log(data);
-       }
-        
-      },
     async onFileSelected(event) {
       const file = event.target.files[0];
       if (file) {
@@ -189,14 +138,6 @@ export default {
     },
     onImageError(event) {
       event.target.src = this.fallbackImage;
-    },
-    delete_photo(id){
-      
-      axios.post(`${environment.apiUrl}publicacion/delete`, { publicacion: id });
-      this.alertMessage = 'Publicación Eliminada';
-        this.showAlert = true;
-      this.loadData();
-      //this.modalEvento = false;
     },
     create_descripcion() {
       axios.post(`${environment.apiUrl}create/descripcion`, {
@@ -312,10 +253,6 @@ export default {
   width: 100%;
   text-align: center;
 }
-.trash{
-  font-size: 15px;
-  margin-top: 20px;
-  cursor: pointer;
-}
+  
   </style>
   
