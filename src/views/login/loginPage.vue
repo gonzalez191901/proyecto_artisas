@@ -54,6 +54,7 @@
           </ion-row>
       </ion-grid>
       <ion-loading :is-open="showLoader" message="Iniciando Sesión..."></ion-loading>
+      <footer>V-1.3</footer>
     </ion-content>
   </ion-page>
 </template>
@@ -283,5 +284,10 @@ ion-content {
 .link-register{
   text-decoration: none;
   color: #424242;
+}
+footer{
+  width: 100%;
+  text-align: center;
+  font-size: 10px;
 }
 </style>

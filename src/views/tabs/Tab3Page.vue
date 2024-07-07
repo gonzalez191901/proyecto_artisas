@@ -146,6 +146,7 @@
         :message="alertMessage"
         buttons="OK"
       ></ion-alert>
+      <ion-loading :is-open="showLoader" message="Cargando..."></ion-loading>
     </ion-content>
   </ion-page>
 </template>
@@ -179,6 +180,7 @@ export default {
       alertTitle: '',
       user: JSON.parse(localStorage.getItem('user')),
       errors: [],
+      showLoader: false,
     };
   },
   methods: {
@@ -196,6 +198,7 @@ export default {
       }
     },
     async submitForm() {
+      this.showLoader = true;
       if (this.selectedFile) {
         const formData = new FormData();
         formData.append('title', this.title);
@@ -246,6 +249,7 @@ export default {
         this.alertTitle = 'Error';
         this.showAlert = true;
       }
+      this.showLoader = false;
     }
   }
 };
