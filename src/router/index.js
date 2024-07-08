@@ -8,6 +8,7 @@ import MenuPage from '../views/MenuPage.vue';
 import CreateUserPage from '../views/user/CreateNewPage.vue';
 import Perfil from '../views/user/PerfilPage.vue';
 import PerfilUpdate from '../views/user/PerfilUpdate.vue';
+import Tab4Page from '../views/tabs/SearchPage.vue';
 
 
 
@@ -103,6 +104,18 @@ const routes = [
       {
         path: 'tab3',
         component: Tab3Page,
+        beforeEnter: async (to, from, next) => {
+          let res = await sesionActiva();
+          if (res) {
+            next();
+          } else {
+            next('/');
+          }
+        }
+      },
+      {
+        path: 'tab4',
+        component: Tab4Page,
         beforeEnter: async (to, from, next) => {
           let res = await sesionActiva();
           if (res) {

@@ -68,7 +68,7 @@
               
                 <ion-avatar slot="start">
                   
-                    <img :src="urlServ+'/uploads/profile/'+come.user.photo" @ionError="onImageError" />
+                    <img :src="urlServ+'/uploads/profile/'+come.user.photo" @error="onImageError" />
                   
                 </ion-avatar>
               
